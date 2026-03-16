@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><title>Authorisation Complete</title></head>
+<body style="font-family:Arial,sans-serif;text-align:center;padding:80px;background:#07070f;color:#fff">
+<p style="color:#aaa">Completing authorisation...</p>
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get('code');
+  const error = params.get('error_description') || params.get('error');
+  if (code) {
+    window.location.href = 'http://127.0.0.1:8080/callback?code=' + encodeURIComponent(code);
+  } else {
+    document.write(`
+      <div style="font-size:48px">&#10007;</div>
+      <h2 style="color:#f87171">Authorisation failed</h2>
+      <p style="color:#aaa">${error || 'Unknown error'}</p>
+    `);
+  }
+</script>
+</body>
+</html>
